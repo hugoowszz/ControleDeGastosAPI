@@ -1,6 +1,6 @@
 package org.example.controledegastosapi.entity;
 
-public enum Type {
+public enum TransactionType {
     INCOME,
     EXPENSE
 }
