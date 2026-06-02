@@ -21,8 +21,8 @@ public class Transaction {
     private Long id;
 
     private String description;
-    private BigDecimal amount;
-    private Type type;
+    private double amount;
+    private TransactionType transactionType;
     private LocalDate date;
 
     @ManyToOne

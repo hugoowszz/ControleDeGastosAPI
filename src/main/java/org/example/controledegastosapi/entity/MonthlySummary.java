@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor @NoArgsConstructor
 public class MonthlySummary {
 
-    private int mounth;
+    private int month;
     private int year;
-    private BigDecimal totalIncome;
-    private BigDecimal totalExpense;
-    private BigDecimal balance;
+    private double totalIncome;// renda
+    private double totalExpense;// despesa
+    private double balance;
 
 }
