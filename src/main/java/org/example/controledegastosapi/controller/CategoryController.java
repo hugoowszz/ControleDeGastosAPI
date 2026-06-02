@@ -1,17 +1,15 @@
-package org.example.controledegastosapi;
+package org.example.controledegastosapi.controller;
 
-import org.example.controledegastosapi.entity.Category;
 import org.example.controledegastosapi.entity.dto.CategoryRequestDTO;
 import org.example.controledegastosapi.entity.dto.CategoryResponseDTO;
 import org.example.controledegastosapi.service.CategoryService;
+import org.example.controledegastosapi.service.TransactionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-
-import static org.springframework.http.client.observation.ClientHttpObservationDocumentation.LowCardinalityKeyNames.URI;
 
 @RestController
 @RequestMapping("/categories")
