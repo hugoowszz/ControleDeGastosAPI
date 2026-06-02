@@ -5,6 +5,7 @@ import org.example.controledegastosapi.entity.Category;
 import org.example.controledegastosapi.entity.dto.CategoryRequestDTO;
 import org.example.controledegastosapi.entity.dto.CategoryResponseDTO;
 import org.example.controledegastosapi.repository.CategoryRepository;
+import org.example.controledegastosapi.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,11 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository repository;
+    private final TransactionRepository transactionRepository;
 
-    public CategoryService(CategoryRepository repository) {
+    public CategoryService(CategoryRepository repository, TransactionRepository transactionRepository) {
         this.repository = repository;
+        this.transactionRepository = transactionRepository;
     }
 
     public List<CategoryResponseDTO> findAll() {
@@ -43,8 +46,12 @@ public class CategoryService {
     }
 
     public void delete(Long id) {
-        Category category = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
-        repository.delete(category);
+        Category category = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Category not found"));
+        if(transactionRepository.existsByCategoryId(id)){
+            throw new IllegalArgumentException("");
+        } else {
+            repository.delete(category);
+
+        }
     }
 }
