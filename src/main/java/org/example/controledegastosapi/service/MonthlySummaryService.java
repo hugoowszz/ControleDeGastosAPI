@@ -7,6 +7,7 @@ import org.example.controledegastosapi.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,6 +24,25 @@ public class MonthlySummaryService {
         MonthlySummary summary = new MonthlySummary();
         summary.setMonth(month);
         summary.setYear(year);
+        double totalIncome = 0;// renda
+        double totalExpense = 0;// despesa
+        for(Transaction transacao : transacoes){
+            if(transacao.getTransactionType() == TransactionType.INCOME){
+                totalIncome += transacao.getAmount();
+            } else if(transacao.getTransactionType() == TransactionType.EXPENSE){
+                totalExpense += transacao.getAmount();
+            }
+        }
+        summary.setTotalIncome(totalIncome);
+        summary.setTotalExpense(totalExpense);
+        summary.setBalance(totalIncome - totalExpense);
+        return summary;
+    }
+    public MonthlySummary gastoCategoria(int categoria_id) {
+        List<Transaction> transacoes = repository.findAllByCategoryId(categoria_id);
+        MonthlySummary summary = new MonthlySummary();
+        summary.setMonth(1);
+        summary.setYear(1);
         double totalIncome = 0;// renda
         double totalExpense = 0;// despesa
         for(Transaction transacao : transacoes){
